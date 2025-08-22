@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         {
             Shoot();
         }
+        Debug.Log("isGrounded: " + isGrounded);
     }
 
     // IsTrigger‚ªON‚ÌCollider‚ÉG‚ê‚½‚ÉŒÄ‚Î‚ê‚é
