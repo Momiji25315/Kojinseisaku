@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
-    // private に変更し、インスペクターから見えなくする
     private float moveSpeed = 5f;
-
     private float deadZone = -15f;
 
     // PlatformSpawnerから速度を設定してもらうための専用入口

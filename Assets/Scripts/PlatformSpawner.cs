@@ -29,22 +29,16 @@ public class PlatformSpawner : MonoBehaviour
     {
         while (true)
         {
-            // --- 足場の生成 ---
             Vector3 spawnPosition = new Vector3(spawnX, spawnY, 0);
             GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
 
-            // PlatformControllerに速度を設定するよう命令する
             newPlatform.GetComponent<PlatformController>().SetSpeed(this.platformMoveSpeed);
 
-            // --- アイテム生成の通知 ---
-            // もしItemSpawnerがインスペクターで設定されていたら、足場を生成したことを通知する
             if (itemSpawner != null)
             {
-                // ItemSpawnerに、新しく作った足場の上へのアイテム生成を依頼する
                 itemSpawner.SpawnItemOnPlatform(newPlatform);
             }
 
-            // --- 次の生成までの待機 ---
             float waitTime = Random.Range(minSpawnInterval, maxSpawnInterval);
             yield return new WaitForSeconds(waitTime);
         }

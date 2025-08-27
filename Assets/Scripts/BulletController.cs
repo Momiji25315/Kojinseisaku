@@ -2,18 +2,36 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float speed = 15f;    // ï¿½eï¿½Ì‘ï¿½ï¿½x
-    public float lifeTime = 3f;  // ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½Ü‚Å‚Ìï¿½ï¿½ï¿½
+    [Header("’e‚ÌŠî–{İ’è")]
+    public float speed = 15f;    // ’e‚Ì‘¬‚³
+    public float lifeTime = 3f;  // ’e‚ªŸè‚ÉÁ‚¦‚é‚Ü‚Å‚ÌŠÔ
 
     private Rigidbody2D rb;
 
+    // ’e‚ª¶‚Ü‚ê‚½uŠÔ‚Éˆê“x‚¾‚¯ŒÄ‚Î‚ê‚é–½—ß
     void Start()
     {
+        // •¨—‰‰Z‚Ì•ó‹ÊiRigidbody2Dj‚ğŒ©‚Â‚¯‚ÄŠo‚¦‚Ä‚¨‚­
         rb = GetComponent<Rigidbody2D>();
-        // ï¿½ï¿½ï¿½Ë‚ï¿½ï¿½ê‚½ï¿½uï¿½Ô‚ÉAï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½Ö—Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ‘O•ûi‰EŒü‚«j‚ÉAİ’è‚³‚ê‚½‘¬‚³‚Å—Í‚ğ—^‚¦‚é
         rb.linearVelocity = transform.right * speed;
-
-        // lifeTimeï¿½bï¿½ï¿½ÉAï¿½ï¿½ï¿½Ì’eï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // lifeTime•bŒã‚ÉA©“®“I‚É‰ä‚ªg‚ğÁ‚µ‹‚é—\–ñ‚ğ‚·‚é
         Destroy(gameObject, lifeTime);
+    }
+
+    // ššš TriggeriIs Trigger‚ªONj‚Ì“–‚½‚è”»’è‚ÉG‚ê‚½‚ÉŒÄ‚Î‚ê‚é–½—ß ššš
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyController enemy = other.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                // ššš “`—ß”µ‚ğ•ú‚Âô•¶‚ğ’Ç‰Á‚¶‚áI ššš
+                Debug.Log("“G‚É–½’†I “_–Å‚ÌpA”­“®‚ğ–½‚¸I");
+                enemy.TakeDamage();
+            }
+            Destroy(gameObject);
+        }
     }
 }

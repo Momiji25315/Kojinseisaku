@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [Header("全般設定")]
+    [Header("�S�ʐݒ�")]
     public GameObject[] itemPrefabs;
-    public float itemMoveSpeed = 5f; // ← アイテムの速度はここで一括管理！
+    public float itemMoveSpeed = 5f;
 
-    [Header("足場上のアイテム設定")]
+    [Header("�����̃A�C�e���ݒ�")]
     [Range(0, 1)] public float chanceOnPlatform = 0.5f;
 
-    [Header("床のアイテム設定")]
+    [Header("���̃A�C�e���ݒ�")]
     public float floorSpawnY = -4.0f;
     public float floorSpawnX = 12f;
     public float minFloorInterval = 2.0f;
@@ -34,11 +34,8 @@ public class ItemSpawner : MonoBehaviour
 
             GameObject newItem = Instantiate(selectedItemPrefab, spawnPosition, Quaternion.identity);
 
-            // ItemControllerに速度を設定するよう命令する
             if (newItem.GetComponent<ItemController>() != null)
             {
-                // ★★★ ここを変更 ★★★
-                // .moveSpeed = ではなく、SetSpeed()メソッドを呼び出す形に変更
                 newItem.GetComponent<ItemController>().SetSpeed(this.itemMoveSpeed);
             }
         }
@@ -50,7 +47,7 @@ public class ItemSpawner : MonoBehaviour
         {
             int index = Random.Range(0, itemPrefabs.Length);
             GameObject selectedItemPrefab = itemPrefabs[index];
-            Vector3 itemPosition = platform.transform.position + new Vector3(0, 0.7f, 0);
+            Vector3 itemPosition = platform.transform.position + new Vector3(0, 1.1f, 0);
 
             GameObject newItem = Instantiate(selectedItemPrefab, itemPosition, Quaternion.identity);
             newItem.transform.SetParent(platform.transform);
