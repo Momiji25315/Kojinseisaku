@@ -15,65 +15,49 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
-    // --- 内部で使う変数 ---
     private Rigidbody2D rb;
     private bool isGrounded;
     private int currentItemCount = 0;
     private int shotCount = 0;
-
-    // ★★★ アニメーション再生装置を操るための変数を追加じゃ ★★★
     private Animator anim;
 
-    // ゲーム開始時に一度だけ呼ばれる
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // ★★★ 自分自身に付いておる Animator を見つけて、変数に覚えておくのじゃ ★★★
         anim = GetComponent<Animator>();
     }
 
-    // 毎フレーム呼ばれる
     void Update()
     {
-        // まず、地面にいるかどうかを判断する
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // ★★★ ここからが新しい魔法じゃ ★★★
-        // もし地面にいるならば…
         if (isGrounded)
         {
-            // …アニメーションの時間を通常の速度で進める (1が通常速度)
             anim.speed = 1;
         }
-        // そうでなければ (つまり、空中にいるならば) …
         else
         {
-            // …アニメーションの時間を止めてしまうのじゃ！ (0で停止)
             anim.speed = 0;
         }
-        // ★★★ ここまでじゃ ★★★
 
-
-        // --- ジャンプ処理 ---
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        // --- 弾の発射処理 ---
         if (shotCount > 0 && Input.GetKeyDown(KeyCode.LeftControl))
         {
             Shoot();
         }
     }
 
-    // (これより下の OnTriggerEnter2D や Shoot メソッドなどは変更なしじゃ)
-
+    // ★★★ アイテム取得と、奈落への落下を検知する術じゃ ★★★
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // もし、触れた相手のタグが "Item" ならば…
         if (other.CompareTag("Item"))
         {
+            // …アイテムを取得する処理を行う
             currentItemCount++;
             Debug.Log("アイテム取得！ 現在のカウント: " + currentItemCount);
 
@@ -85,6 +69,16 @@ public class PlayerController : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+
+        // もし、触れた相手（のオブジェクト名）が "DeadZone" ならば…
+        if (other.name == "DeadZone")
+        {
+            // …コンソールに無念の叫びを記す！
+            Debug.Log("ゲームオーバー！");
+
+            // そして、世界の時を止めるのじゃ
+            Time.timeScale = 0;
+        }
     }
 
     void Shoot()
@@ -92,6 +86,15 @@ public class PlayerController : MonoBehaviour
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         shotCount--;
         Debug.Log("発射！ 残弾数: " + shotCount);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("ゲームクリア！");
+            Time.timeScale = 0;
+        }
     }
 
     private void OnDrawGizmosSelected()
