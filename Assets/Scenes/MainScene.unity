@@ -1076,7 +1076,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!61 &1256955924
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1269,12 +1269,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundPrefab: {fileID: 8814671826747452368, guid: 765cfc448eeb2304aae5874acb0fb9b2, type: 3}
-  scrollSpeed: 40
+  scrollSpeed: 20
   spawnY: -7
   minGroundLength: 3
   maxGroundLength: 8
-  minCliffWidth: 2
-  maxCliffWidth: 4
+  minCliffWidth: 1
+  maxCliffWidth: 2
 --- !u!1001 &2982402612419809530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1283,6 +1283,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3584888897874296503, guid: 765cfc448eeb2304aae5874acb0fb9b2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3584888897874296503, guid: 765cfc448eeb2304aae5874acb0fb9b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1329,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814671826747452368, guid: 765cfc448eeb2304aae5874acb0fb9b2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
