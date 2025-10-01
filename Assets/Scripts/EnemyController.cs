@@ -3,59 +3,121 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("“_–Å•\Œ»‚Ìİ’è")]
-    public float damageFlashTime = 0.5f;   // “_–Å‚·‚é‡ŒvŠÔ
-    public Color damageColor = Color.white;  // “_–Å‚·‚é‚ÌF
-    public float flashInterval = 0.05f;    // “_–Å‚ÌŠÔŠui•bjB¬‚³‚¢‚Ù‚Ç‘¬‚¢I
+    [Header("AIã‚¸ãƒ£ãƒ³ãƒ—è¨­å®š")]
+    public float jumpCheckDistance = 3f;
+    public float jumpRayAngle = -45f;
+    public float jumpCooldown = 0.5f;
 
-    [Header("‰Ÿ‚µ–ß‚µiƒmƒbƒNƒoƒbƒNj‚Ìİ’è")]
-    public float knockbackDistance = 0.5f; // 1”­“–‚½‚è‚Ì‰Ÿ‚µ–ß‚³‚ê‚é‹——£
+    [Header("ã‚¸ãƒ£ãƒ³ãƒ—è¨­å®š")]
+    public float jumpForce = 20f;
+    public Transform cliffCheck;
+    public LayerMask groundLayer;
 
+    [Header("ç‚¹æ»…è¡¨ç¾ã®è¨­å®š")]
+    public float damageFlashTime = 0.5f;
+    public Color damageColor = Color.white;
+    public float flashInterval = 0.05f;
+
+    [Header("æŠ¼ã—æˆ»ã—ï¼ˆãƒãƒƒã‚¯ãƒãƒƒã‚¯ï¼‰ã®è¨­å®š")]
+    public float knockbackDistance = 0.5f;
+
+    private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
+    private Coroutine damageFlashCoroutine;
+    private bool isGroundedOnRail = false;
 
     void Start()
     {
-        // ©g‚ÌŒ©‚½–Ú‚ği‚é SpriteRenderer ‚ğŒ©‚Â‚¯‚ÄŠo‚¦‚Ä‚¨‚­
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        // Å‰‚ÌF‚ğŒ³X‚ÌF‚Æ‚µ‚ÄŠo‚¦‚Ä‚¨‚­
         originalColor = spriteRenderer.color;
+
+        // å°ãã®ãƒ¬ãƒ¼ãƒ«ï¼ˆãƒˆãƒªã‚¬ãƒ¼ï¼‰ã‚’è‡ªå‹•ã§è¿½åŠ 
+        BoxCollider2D railCollider = gameObject.AddComponent<BoxCollider2D>();
+        railCollider.isTrigger = true;
+        BoxCollider2D mainCollider = GetComponent<BoxCollider2D>();
+        if (mainCollider != null)
+        {
+            railCollider.size = new Vector2(mainCollider.size.x + 0.1f, 0.1f);
+            railCollider.offset = new Vector2(mainCollider.offset.x, mainCollider.offset.y - mainCollider.size.y / 2);
+        }
     }
 
-    // ’e‚©‚çuƒ_ƒ[ƒW‚ğó‚¯‚æv‚Æ–½—ß‚³‚ê‚½‚ÉŒÄ‚Î‚ê‚é
+    void FixedUpdate()
+    {
+        if (isGroundedOnRail)
+        {
+            RaycastHit2D groundAheadInfo = Physics2D.Raycast(cliffCheck.position, Vector2.down, 1f, groundLayer);
+            if (groundAheadInfo.collider == null)
+            {
+                Quaternion rotation = Quaternion.Euler(0, 0, jumpRayAngle);
+                Vector2 direction = rotation * -transform.right;
+                RaycastHit2D landingSpotInfo = Physics2D.Raycast(cliffCheck.position, direction, jumpCheckDistance, groundLayer);
+
+                if (landingSpotInfo.collider != null)
+                {
+                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGroundedOnRail = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGroundedOnRail = false;
+        }
+    }
+
+    // â˜…â˜…â˜… ã“ã® TakeDamage ãƒ¡ã‚½ãƒƒãƒ‰ãŒé‡è¦ã§ã™ â˜…â˜…â˜…
     public void TakeDamage()
     {
-        // ‚Ü‚¸A‰ä‚ªg‚ğŒã‚ë‚Ö‰º‚°‚é
-        // ‰E•ûŒüiVector3.rightj‚ÖAİ’è‚µ‚½‹——£‚¾‚¯ˆÚ“®‚·‚é‚Ì‚¶‚á
-        transform.position += Vector3.right * knockbackDistance;
+        // ãƒãƒƒã‚¯ãƒãƒƒã‚¯
+        transform.position += -Vector3.right * knockbackDistance;
 
-        // Ÿ‚ÉA“_–Å‚Ìp‚ğ‰r¥‚·‚é
-        // ˜A‘±‚Åp‚ª”­“®‚µ‚Ä‚à‚¨‚©‚µ‚­‚È‚ç‚Ê‚æ‚¤Aˆê“xŒÃ‚¢p‚Í’†’f‚·‚é
-        StopAllCoroutines();
-        StartCoroutine(DamageFlash());
+        // ç‚¹æ»…å‡¦ç†ã®ç®¡ç†
+        if (damageFlashCoroutine != null)
+        {
+            StopCoroutine(damageFlashCoroutine);
+        }
+        damageFlashCoroutine = StartCoroutine(DamageFlash());
     }
 
-    // “_–Å‚Ìp‚Ì–{‘Ì
+    // â˜…â˜…â˜… ã“ã® DamageFlash ãƒ¡ã‚½ãƒƒãƒ‰ã‚‚å¿…è¦ã§ã™ â˜…â˜…â˜…
     private IEnumerator DamageFlash()
     {
         float timer = 0;
-
-        // w’è‚³‚ê‚½‡ŒvŠÔA“_–Å‚ğŒJ‚è•Ô‚·
         while (timer < damageFlashTime)
         {
-            // ƒ_ƒ[ƒWF‚É•Ï‚¦‚é ¨ ­‚µ‘Ò‚Â
             spriteRenderer.color = damageColor;
             yield return new WaitForSeconds(flashInterval);
-
-            // Œ³‚ÌF‚É–ß‚· ¨ ­‚µ‘Ò‚Â
             spriteRenderer.color = originalColor;
             yield return new WaitForSeconds(flashInterval);
-
-            // Œo‰ßŠÔ‚ğŒvZ
             timer += flashInterval * 2;
         }
-
-        // ”O‚Ì‚½‚ßAÅŒã‚É•K‚¸Œ³‚ÌF‚É–ß‚µ‚Ä‚¨‚­
         spriteRenderer.color = originalColor;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (cliffCheck == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(cliffCheck.position, Vector2.down * 1f);
+
+        Quaternion rotation = Quaternion.Euler(0, 0, jumpRayAngle);
+        Vector2 direction = rotation * -transform.right;
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(cliffCheck.position, direction * jumpCheckDistance);
     }
 }
