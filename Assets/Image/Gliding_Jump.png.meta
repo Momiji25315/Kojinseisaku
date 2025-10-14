@@ -1,43 +1,31 @@
 fileFormatVersion: 2
-guid: 2d6141300c2cf4446a2a5efc4ffb103e
+guid: 49d0c61299021554f989ab023911ee3f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9182236790488118879
-    second: ao_0
+      213: 9120679445117625614
+    second: Gliding_Jump_0
   - first:
-      213: -8574327143103819478
-    second: ao_1
+      213: 7361710145409857145
+    second: Gliding_Jump_1
   - first:
-      213: -5478684766683073253
-    second: ao_2
+      213: 5878957270571865559
+    second: Gliding_Jump_2
   - first:
-      213: -8712910501632542220
-    second: ao_3
+      213: 6698241770793493741
+    second: Gliding_Jump_3
   - first:
-      213: 7661977395926359335
-    second: ao_4
+      213: 4082676561952757689
+    second: Gliding_Jump_4
   - first:
-      213: -1579301328756166980
-    second: ao_5
+      213: -4169780553248434858
+    second: Gliding_Jump_5
   - first:
-      213: 3831233932500289716
-    second: ao_6
+      213: 127183042985934009
+    second: Gliding_Jump_6
   - first:
-      213: -119146664829357738
-    second: ao_7
-  - first:
-      213: -1063052973821114269
-    second: ao_8
-  - first:
-      213: 1460523908113162951
-    second: ao_9
-  - first:
-      213: 5384083985370906850
-    second: ao_10
-  - first:
-      213: -4237313613082774021
-    second: ao_11
+      213: -1592401420481329795
+    second: Gliding_Jump_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -172,13 +160,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ao_0
+      name: Gliding_Jump_0
       rect:
         serializedVersion: 2
-        x: 46
-        y: 20
-        width: 43
-        height: 65
+        x: 56
+        y: 0
+        width: 31
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a9ce63e944229080800000000000000
-      internalID: -9182236790488118879
+      spriteID: e056174c1a9239e70800000000000000
+      internalID: 9120679445117625614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ao_1
+      name: Gliding_Jump_1
       rect:
         serializedVersion: 2
-        x: 164
-        y: 20
-        width: 54
-        height: 65
+        x: 184
+        y: 0
+        width: 31
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a219e4f54eed10980800000000000000
-      internalID: -8574327143103819478
+      spriteID: 9763b8c8f5c0a2660800000000000000
+      internalID: 7361710145409857145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ao_2
+      name: Gliding_Jump_2
       rect:
         serializedVersion: 2
-        x: 292
-        y: 30
-        width: 51
-        height: 56
+        x: 305
+        y: 0
+        width: 41
+        height: 67
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,20 +219,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b15f2856b3dc7f3b0800000000000000
-      internalID: -5478684766683073253
+      spriteID: 7d5d2225d70469150800000000000000
+      internalID: 5878957270571865559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ao_3
+      name: Gliding_Jump_3
       rect:
         serializedVersion: 2
-        x: 421
-        y: 27
+        x: 424
+        y: 6
         width: 50
-        height: 58
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,108 +241,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f9fb6ecf06851780800000000000000
-      internalID: -8712910501632542220
+      spriteID: de464d7d66fe4fc50800000000000000
+      internalID: 6698241770793493741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ao_4
+      name: Gliding_Jump_4
       rect:
         serializedVersion: 2
-        x: 553
-        y: 20
-        width: 41
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 72d5341c8dfc45a60800000000000000
-      internalID: 7661977395926359335
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ao_5
-      rect:
-        serializedVersion: 2
-        x: 685
-        y: 20
-        width: 40
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cbeaf2a1fc1351ae0800000000000000
-      internalID: -1579301328756166980
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ao_6
-      rect:
-        serializedVersion: 2
-        x: 814
-        y: 20
-        width: 43
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4b84a1e76f64b2530800000000000000
-      internalID: 3831233932500289716
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ao_7
-      rect:
-        serializedVersion: 2
-        x: 932
-        y: 20
-        width: 54
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6517ca65db4b85ef0800000000000000
-      internalID: -119146664829357738
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ao_8
-      rect:
-        serializedVersion: 2
-        x: 1060
-        y: 30
+        x: 550
+        y: 7
         width: 52
-        height: 56
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 36848fdd3f64f31f0800000000000000
-      internalID: -1063052973821114269
+      spriteID: 9b7d100c3b498a830800000000000000
+      internalID: 4082676561952757689
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ao_9
+      name: Gliding_Jump_5
       rect:
         serializedVersion: 2
-        x: 1190
-        y: 27
-        width: 49
-        height: 58
+        x: 686
+        y: 0
+        width: 44
+        height: 67
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -385,20 +285,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7c2ec0991c2d44410800000000000000
-      internalID: 1460523908113162951
+      spriteID: 6559b44eda6f126c0800000000000000
+      internalID: -4169780553248434858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ao_10
+      name: Gliding_Jump_6
       rect:
         serializedVersion: 2
-        x: 1321
-        y: 20
-        width: 41
-        height: 64
+        x: 822
+        y: 0
+        width: 36
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,20 +307,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2e007eccbdb18ba40800000000000000
-      internalID: 5384083985370906850
+      spriteID: 9bc31a2cd48d3c100800000000000000
+      internalID: 127183042985934009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ao_11
+      name: Gliding_Jump_7
       rect:
         serializedVersion: 2
-        x: 1453
-        y: 20
-        width: 39
-        height: 64
+        x: 950
+        y: 0
+        width: 34
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -429,8 +329,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bf5364a18b90235c0800000000000000
-      internalID: -4237313613082774021
+      spriteID: d7502605857a6e9e0800000000000000
+      internalID: -1592401420481329795
       vertices: []
       indices: 
       edges: []
@@ -448,19 +348,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      ao_0: -9182236790488118879
-      ao_1: -8574327143103819478
-      ao_10: 5384083985370906850
-      ao_11: -4237313613082774021
-      ao_2: -5478684766683073253
-      ao_3: -8712910501632542220
-      ao_4: 7661977395926359335
-      ao_5: -1579301328756166980
-      ao_6: 3831233932500289716
-      ao_7: -119146664829357738
-      ao_8: -1063052973821114269
-      ao_9: 1460523908113162951
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
