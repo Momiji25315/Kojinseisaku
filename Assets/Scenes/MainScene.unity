@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundPrefab: {fileID: 3100099017330926333, guid: c6b67779824ef6c46a1f21a5345002fa, type: 3}
-  scrollSpeed: 35
+  scrollSpeed: 10
 --- !u!4 &29735746
 Transform:
   m_ObjectHideFlags: 0
@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -302,6 +303,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db4ef838267ac8459564e77e1dd8487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSize: 5
+  zoomAmount: 0.5
+  zoomSpeed: 4
 --- !u!1 &575054002
 GameObject:
   m_ObjectHideFlags: 0
