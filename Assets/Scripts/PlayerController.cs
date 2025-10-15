@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
+    // --- 内部で使う変数 ---
     private Rigidbody2D rb;
     private bool isGrounded;
     private int currentItemCount = 0;
@@ -29,35 +30,38 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // --- 接地判定 ---
+        // 毎フレーム、足元に地面があるかどうかを確認する
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        if (isGrounded)
-        {
-            anim.speed = 1;
-        }
-        else
-        {
-            anim.speed = 0;
-        }
+        // --- アニメーション制御 ---
+        // isGrounded の状態をAnimatorに伝える
+        // isGrounded が false のとき（＝空中にいるとき）、"isJumping" パラメータを true にする
+        // isGrounded が true のとき（＝地面にいるとき）、"isJumping" パラメータを false にする
+        anim.SetBool("isJumping", !isGrounded);
 
+        // --- 操作入力 ---
+        // もし地面にいて、かつスペースキーが押された瞬間に
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
+            // ジャンプする
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
+        // もし撃てる弾が1発以上あり、かつ左コントロールキーが押された瞬間に
         if (shotCount > 0 && Input.GetKeyDown(KeyCode.LeftControl))
         {
+            // 弾を撃つ
             Shoot();
         }
     }
 
-    // ★★★ アイテム取得と、奈落への落下を検知する術じゃ ★★★
+    // アイテム取得 と 奈落への落下 を検知する
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // もし、触れた相手のタグが "Item" ならば…
+        // アイテムに触れた場合
         if (other.CompareTag("Item"))
         {
-            // …アイテムを取得する処理を行う
             currentItemCount++;
             Debug.Log("アイテム取得！ 現在のカウント: " + currentItemCount);
 
@@ -70,17 +74,15 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        // もし、触れた相手（のオブジェクト名）が "DeadZone" ならば…
+        // DeadZoneに触れた場合
         if (other.name == "DeadZone")
         {
-            // …コンソールに無念の叫びを記す！
             Debug.Log("ゲームオーバー！");
-
-            // そして、世界の時を止めるのじゃ
-            Time.timeScale = 0;
+            Time.timeScale = 0; // ゲームを停止
         }
     }
 
+    // 弾を発射する処理
     void Shoot()
     {
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
@@ -88,15 +90,17 @@ public class PlayerController : MonoBehaviour
         Debug.Log("発射！ 残弾数: " + shotCount);
     }
 
+    // 敵との接触による勝利判定
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("ゲームクリア！");
-            Time.timeScale = 0;
+            Time.timeScale = 0; // ゲームを停止
         }
     }
 
+    // Sceneビューで接地判定の範囲を見やすくするためのもの
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;
