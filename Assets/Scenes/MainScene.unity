@@ -310,7 +310,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1db4ef838267ac8459564e77e1dd8487, type: 3}
   m_Name: 
@@ -1160,7 +1160,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.055384044, y: 0.004672706}
+  m_Offset: {x: -0.08794382, y: 0.004672706}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1170,7 +1170,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.255683, y: 0.64065456}
+  m_Size: {x: 0.19056344, y: 0.64065456}
   m_EdgeRadius: 0
 --- !u!1 &1318051068 stripped
 GameObject:

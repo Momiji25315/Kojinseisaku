@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("ƒWƒƒƒ“ƒvİ’è")]
+    [Header("ã‚¸ãƒ£ãƒ³ãƒ—è¨­å®š")]
     public float jumpForce = 10f;
 
-    [Header("Ú’n”»’è")]
+    [Header("æ¥åœ°åˆ¤å®š")]
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
 
-    [Header("ƒAƒCƒeƒ€‚Æ’e")]
+    [Header("ã‚¢ã‚¤ãƒ†ãƒ ã¨å¼¾")]
     public int itemsPerShot = 5;
     public GameObject bulletPrefab;
     public Transform firePoint;
 
-    // --- “à•”‚Åg‚¤•Ï” ---
+    // --- å†…éƒ¨ã§ä½¿ã†å¤‰æ•° ---
     private Rigidbody2D rb;
     private bool isGrounded;
     private int currentItemCount = 0;
@@ -30,77 +30,72 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // --- Ú’n”»’è ---
-        // –ˆƒtƒŒ[ƒ€A‘«Œ³‚É’n–Ê‚ª‚ ‚é‚©‚Ç‚¤‚©‚ğŠm”F‚·‚é
+        // --- æ¥åœ°åˆ¤å®š ---
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // --- ƒAƒjƒ[ƒVƒ‡ƒ“§Œä ---
-        // isGrounded ‚Ìó‘Ô‚ğAnimator‚É“`‚¦‚é
-        // isGrounded ‚ª false ‚Ì‚Æ‚«i‹ó’†‚É‚¢‚é‚Æ‚«jA"isJumping" ƒpƒ‰ƒ[ƒ^‚ğ true ‚É‚·‚é
-        // isGrounded ‚ª true ‚Ì‚Æ‚«i’n–Ê‚É‚¢‚é‚Æ‚«jA"isJumping" ƒpƒ‰ƒ[ƒ^‚ğ false ‚É‚·‚é
-        anim.SetBool("isJumping", !isGrounded);
+        // --- ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³åˆ¶å¾¡ ---
+        // Rigidbodyã®å‚ç›´æ–¹å‘ã®é€Ÿåº¦(rb.linearVelocity.y)ã‚’ã€Animatorã®"velocityY"ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã«æ¸¡ã™
+        // ã“ã‚Œã§Unityæ¨å¥¨ã®è¨˜æ³•ã«ãªã‚Šã¾ã™
+        anim.SetFloat("velocityY", rb.linearVelocity.y);
 
-        // --- ‘€ì“ü—Í ---
-        // ‚à‚µ’n–Ê‚É‚¢‚ÄA‚©‚ÂƒXƒy[ƒXƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ‚É
+
+        // --- æ“ä½œå…¥åŠ› ---
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
-            // ƒWƒƒƒ“ƒv‚·‚é
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        // ‚à‚µŒ‚‚Ä‚é’e‚ª1”­ˆÈã‚ ‚èA‚©‚Â¶ƒRƒ“ƒgƒ[ƒ‹ƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ‚É
         if (shotCount > 0 && Input.GetKeyDown(KeyCode.LeftControl))
         {
-            // ’e‚ğŒ‚‚Â
             Shoot();
         }
     }
 
-    // ƒAƒCƒeƒ€æ“¾ ‚Æ “Ş—‚Ö‚Ì—‰º ‚ğŒŸ’m‚·‚é
+    // ã‚¢ã‚¤ãƒ†ãƒ å–å¾— ã¨ å¥ˆè½ã¸ã®è½ä¸‹ ã‚’æ¤œçŸ¥ã™ã‚‹
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // ƒAƒCƒeƒ€‚ÉG‚ê‚½ê‡
+        // ã‚¢ã‚¤ãƒ†ãƒ ã«è§¦ã‚ŒãŸå ´åˆ
         if (other.CompareTag("Item"))
         {
             currentItemCount++;
-            Debug.Log("ƒAƒCƒeƒ€æ“¾I Œ»İ‚ÌƒJƒEƒ“ƒg: " + currentItemCount);
+            Debug.Log("ã‚¢ã‚¤ãƒ†ãƒ å–å¾—ï¼ ç¾åœ¨ã®ã‚«ã‚¦ãƒ³ãƒˆ: " + currentItemCount);
 
             if (currentItemCount >= itemsPerShot)
             {
                 currentItemCount = 0;
                 shotCount++;
-                Debug.Log("’e‚ğ1”­Šl“¾I c’e”: " + shotCount);
+                Debug.Log("å¼¾ã‚’1ç™ºç²å¾—ï¼ æ®‹å¼¾æ•°: " + shotCount);
             }
             Destroy(other.gameObject);
         }
 
-        // DeadZone‚ÉG‚ê‚½ê‡
+        // DeadZoneã«è§¦ã‚ŒãŸå ´åˆ
         if (other.name == "DeadZone")
         {
-            Debug.Log("ƒQ[ƒ€ƒI[ƒo[I");
-            Time.timeScale = 0; // ƒQ[ƒ€‚ğ’â~
+            Debug.Log("ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ï¼");
+            Time.timeScale = 0; // ã‚²ãƒ¼ãƒ ã‚’åœæ­¢
         }
     }
 
-    // ’e‚ğ”­Ë‚·‚éˆ—
+    // å¼¾ã‚’ç™ºå°„ã™ã‚‹å‡¦ç†
     void Shoot()
     {
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         shotCount--;
-        Debug.Log("”­ËI c’e”: " + shotCount);
+        Debug.Log("ç™ºå°„ï¼ æ®‹å¼¾æ•°: " + shotCount);
     }
 
-    // “G‚Æ‚ÌÚG‚É‚æ‚éŸ—˜”»’è
+    // æ•µã¨ã®æ¥è§¦ã«ã‚ˆã‚‹å‹åˆ©åˆ¤å®š
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("ƒQ[ƒ€ƒNƒŠƒAI");
-            Time.timeScale = 0; // ƒQ[ƒ€‚ğ’â~
+            Debug.Log("ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ï¼");
+            Time.timeScale = 0; // ã‚²ãƒ¼ãƒ ã‚’åœæ­¢
         }
     }
 
-    // Sceneƒrƒ…[‚ÅÚ’n”»’è‚Ì”ÍˆÍ‚ğŒ©‚â‚·‚­‚·‚é‚½‚ß‚Ì‚à‚Ì
+    // Sceneãƒ“ãƒ¥ãƒ¼ã§æ¥åœ°åˆ¤å®šã®ç¯„å›²ã‚’è¦‹ã‚„ã™ãã™ã‚‹ãŸã‚ã®ã‚‚ã®
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;
