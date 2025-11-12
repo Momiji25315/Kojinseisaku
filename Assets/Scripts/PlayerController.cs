@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         // --- アニメーション制御 ---
         // Rigidbodyの垂直方向の速度(rb.linearVelocity.y)を、Animatorの"velocityY"パラメータに渡す
         // これでUnity推奨の記法になります
-        anim.SetFloat("velocityY", rb.linearVelocity.y);
+        anim.SetFloat("velocityy", rb.linearVelocity.y);
 
 
         // --- 操作入力 ---
